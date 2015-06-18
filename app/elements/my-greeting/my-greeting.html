@@ -32,15 +32,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Polymer({
         is: 'my-greeting',
 
-
-        factoryImpl: function(text){
-          this.greetings.value = text;
-        },
-
         properties: {
           greeting: {
             type: String,
-            value: 'Welcome!',
+            value: "Hello!",
             notify: true
           }
         }
