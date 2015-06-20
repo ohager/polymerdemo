@@ -1,0 +1,21 @@
+<script>
+  EditorContentBehavior = {
+
+    properties: {
+      model : {
+        type: Object,
+        readOnly : true,
+        reflectToAttribute : true
+      }
+    },
+
+    __model : {},
+
+    handleChange : function(e){
+      this.__model[e.target.name] = e.target.value;
+      this._setModel(this.__model);
+    }
+
+
+  };
+</script>

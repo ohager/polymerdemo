@@ -1,0 +1,28 @@
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="editor-content-behaviour.html">
+
+<dom-module id="editor-content-person">
+  <style>
+    :host {
+      display: block;
+    }
+
+  </style>
+  <template>
+      <paper-input name="firstName" label="First Name" on-change="handleChange"></paper-input>
+      <paper-input name="lastName" label="Last Name" on-change="handleChange"></paper-input>
+  </template>
+
+  <script>
+    (function() {
+
+      "use strict";
+      Polymer({
+        is: 'editor-content-person',
+        behaviors:[EditorContentBehavior]
+
+      });
+    })();
+  </script>
+
+</dom-module>

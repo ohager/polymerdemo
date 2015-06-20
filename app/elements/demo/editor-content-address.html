@@ -1,0 +1,59 @@
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="editor-content-behaviour.html">
+
+<dom-module id="editor-content-address">
+  <style>
+    :host {
+      display: block;
+    }
+
+    .inline {
+      display: block;
+      width: 100%
+    }
+
+    .w20{
+      display: inline-block;
+      width : 19%
+    }
+
+    .w30{
+      display: inline-block;
+      width : 29%
+    }
+
+    .w70{
+      display: inline-block;
+      width : 69%
+    }
+
+    .w80{
+      display: inline-block;
+      width : 79%
+    }
+
+  </style>
+  <template>
+    <div class="inline">
+      <paper-input class="w80" name="street" label="Street" on-change="handleChange"></paper-input>
+      <paper-input class="w20" name="number" label="Number" on-change="handleChange"></paper-input>
+    </div>
+    <div class="inline">
+      <paper-input class="w30" name="zip" label="ZIP" on-change="handleChange"></paper-input>
+      <paper-input class="w70" name="city" label="City" on-change="handleChange"></paper-input>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+
+      "use strict";
+      Polymer({
+        is: 'editor-content-address',
+        behaviors : [EditorContentBehavior]
+
+      });
+    })();
+  </script>
+
+</dom-module>

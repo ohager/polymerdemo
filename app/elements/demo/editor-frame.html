@@ -1,0 +1,50 @@
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+
+<dom-module id="editor-frame">
+  <style>
+    :host {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      h1.paper-font-display1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+  <template>
+    <h1 class="paper-font-display1"><span>{{greeting}}</span></h1>
+    <!-- Listens for "input" event and sets greeting to <input>.value -->
+    <div id="editor-content">
+      <content></content>
+    </div>
+    <paper-button on-click="save" raised>Save</paper-button>
+  </template>
+
+  <script>
+    (function() {
+      "use strict";
+      Polymer({
+        is: 'editor-frame',
+
+        properties: {
+          greeting: {
+            type: String,
+            notify : true
+          },
+          onsave:{
+            observer : true
+          }
+        },
+
+        save : function() {
+          var model= this.querySelector('#editor-content').firstElementChild.model;
+          alert("saved: " + JSON.stringify(model));
+
+        }
+
+      });
+    })();
+  </script>
+
+</dom-module>
