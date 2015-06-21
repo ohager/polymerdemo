@@ -1,4 +1,8 @@
+
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="../common/message-dialog.html">
+
+message-dialog
 
 <dom-module id="editor-frame">
   <style>
@@ -6,19 +10,26 @@
       display: block;
     }
 
+    .button {
+      margin-top: 1em;
+    }
+
     @media (max-width: 600px) {
       h1.paper-font-display1 {
         font-size: 24px;
       }
     }
+
   </style>
+
   <template>
     <h1 class="paper-font-display1"><span>{{greeting}}</span></h1>
-    <!-- Listens for "input" event and sets greeting to <input>.value -->
-    <div id="editor-content">
+    <div id="content">
       <content></content>
     </div>
-    <paper-button on-click="save" raised>Save</paper-button>
+    <paper-button class="button" on-click="save" raised>Save</paper-button>
+    <message-dialog id="dialog" title="Saved Data" message="[[editorData]]" ></message-dialog>
+
   </template>
 
   <script>
@@ -27,7 +38,14 @@
       Polymer({
         is: 'editor-frame',
 
+
+
         properties: {
+          editorData : {
+            type: String,
+            notify: true,
+            value: ''
+          },
           greeting: {
             type: String,
             notify : true
@@ -37,10 +55,11 @@
           }
         },
 
-        save : function() {
-          var model= this.querySelector('#editor-content').firstElementChild.model;
-          alert("saved: " + JSON.stringify(model));
 
+        save : function() {
+          var model= this.$.content.firstElementChild.model;
+          this.editorData = JSON.stringify(model);
+          this.$.dialog.open();
         }
 
       });
@@ -48,3 +67,4 @@
   </script>
 
 </dom-module>
+
