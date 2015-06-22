@@ -12,3 +12,34 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+/*My stuff*/
+.inline {
+  display: block;
+  width: 100%
+}
+
+.w20{
+  display: inline-block;
+  width : 19%
+}
+
+.w30{
+  display: inline-block;
+  width : 29%
+}
+
+.w70{
+  display: inline-block;
+  width : 69%
+}
+
+.w80{
+  display: inline-block;
+  width : 79%
+}
+
+.w90{
+  display: inline-block;
+  width : 89%
+}

@@ -1,0 +1,117 @@
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="todo-item.html">
+
+<dom-module id="todo-list">
+  <style>
+    :host {
+      display: block;
+    }
+
+    .button {
+      margin-top: 1em;
+    }
+
+    @media (max-width: 600px) {
+      h1.paper-font-display1 {
+        font-size: 24px;
+      }
+    }
+
+    .centered {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    .list {
+      padding-top: 12px;
+      background-color: white;
+      width: 40%;
+      display: none;
+      @apply(--shadow-elevation-2dp);
+    }
+
+    .todoinput{
+      margin: 1em;
+    }
+
+    .todoinput /deep/ input{
+      font-size : 24px !important;
+    }
+
+    paper-item {
+      font-size: 24px;
+    }
+
+    .head {
+      width : 40%
+    }
+
+  </style>
+
+  <template>
+    <h1 class="paper-font-display1"><span>To Do List</span></h1>
+
+    <paper-material class="head centered" >
+          <paper-input id="todoinput" class="todoinput" label="What do you need to do?" on-keypress="keyPressed"></paper-input>
+    </paper-material>
+
+    <div id="list" class="list centered">
+      <template is="dom-repeat" items="{{items}}">
+        <todo-item id="{{index}}">{{item.value}}</todo-item>
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+    (function() {
+      "use strict";
+      Polymer({
+        is: 'todo-list',
+
+        properties: {
+          items : {
+            type: Array,
+            value : [],
+            readonly: true
+          }
+        },
+
+        listeners : {
+          "checked-item" : "_onChanged"
+        },
+
+        _setListVisible : function(isVisible){
+          this.$.list.style.display = isVisible ? "block" : "none";
+        },
+
+        _onChanged : function(e){
+          this.items[e.detail.id].checked = e.detail.checked;
+          var unchecked = this.items.filter(function(item){
+            return !item.checked;
+          });
+
+          this._setListVisible(unchecked.length > 0);
+        },
+
+        keyPressed : function(e){
+          if(e.keyCode === 13){ // enter
+            e.preventDefault();
+            this.addItem();
+          }
+        },
+
+        addItem : function() {
+          var input = this.$.todoinput;
+          this.push('items', {value : input.value, checked : false} );
+          input.value = "";
+          this._setListVisible(true);
+        }
+
+      });
+    })();
+  </script>
+
+</dom-module>
+

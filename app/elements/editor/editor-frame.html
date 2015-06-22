@@ -2,7 +2,6 @@
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
 <link rel="import" href="../common/message-dialog.html">
 
-message-dialog
 
 <dom-module id="editor-frame">
   <style>
@@ -38,8 +37,6 @@ message-dialog
       Polymer({
         is: 'editor-frame',
 
-
-
         properties: {
           editorData : {
             type: String,
@@ -49,9 +46,6 @@ message-dialog
           greeting: {
             type: String,
             notify : true
-          },
-          onsave:{
-            observer : true
           }
         },
 

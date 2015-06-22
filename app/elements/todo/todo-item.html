@@ -1,0 +1,67 @@
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+
+<dom-module id="todo-item">
+  <style>
+
+    paper-item {
+      font-size: 24px;
+    }
+
+    paper-checkbox {
+      margin-right: 1em;
+    }
+
+    div#content{
+      transition: color 1s ease-out;
+    }
+
+    .done {
+      text-decoration: line-through;
+      color : lightgray;
+    }
+
+  </style>
+
+    <template>
+      <paper-item>
+        <paper-checkbox on-change="toggled"></paper-checkbox>
+        <paper-item-body>
+          <div id="content">
+            <content></content>
+          </div>
+        </paper-item-body>
+      </paper-item>
+    </template>
+
+  <script>
+    (function() {
+      "use strict";
+      Polymer({
+        is: 'todo-item',
+
+        properties : {
+          id : String
+        },
+
+        toggled : function(e){
+          var content = this.$.content;
+          if(e.target.checked){
+            content.classList.add("done");
+          }
+          else{
+            content.classList.remove("done");
+          }
+
+          this.fire("checked-item", {
+            id : this.id,
+            checked : e.target.checked
+          })
+
+        }
+      });
+    })();
+  </script>
+
+</dom-module>
+
